@@ -22,6 +22,7 @@ function App(): JSX.Element {
     setGameWinner('');
   };
 
+  {/*This performs the winning logic of the code*/}
   const checkIsWinner = () => {
     if (
       gameState[0] != 'empty' &&
@@ -76,6 +77,7 @@ function App(): JSX.Element {
     }
   };
 
+  {/* This changes the icon that was clicked depending on whose tuen it is */}
   const onChangeItem = (itemNumber: number) => {
     if (gameWinner) {
       return Snackbar.show({
@@ -102,11 +104,11 @@ function App(): JSX.Element {
     <SafeAreaView>
       <StatusBar />
       {gameWinner ? (
-        <View style={styles.gameWinner}>
+        <View style={[styles.gameWinner, styles.btn]}>
           <Text style={styles.gameWinnerTxt}>{gameWinner}</Text>
         </View>
       ) : (
-        <View style={isCross ? styles.playerX : styles.playerO}>
+        <View style={isCross ? [styles.playerX, styles.btn] : [styles.playerO, styles.btn]}>
           <Text style={styles.gameWinnerTxt}>
             Player {isCross ? 'X' : 'O'}'s turn
           </Text>
@@ -129,7 +131,7 @@ function App(): JSX.Element {
 
       <Pressable
       onPress={reload}
-      style = {styles.gameBtn}
+      style = {[styles.gameBtn, styles.btn]}
       >
         <Text style = {styles.gameBtnTxt}>{gameWinner ? "Restart the game" : "Reload the game"}</Text>
       </Pressable>
@@ -138,29 +140,21 @@ function App(): JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  gameWinner: {
-    margin: 15,
-    backgroundColor: 'green',
+  btn: {
+    margin: 14,
     height: 60,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  gameWinner: {
+    backgroundColor: 'green',
   },
   playerX: {
-    margin: 15,
     backgroundColor: 'green',
-    height: 60,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   playerO: {
-    margin: 15,
     backgroundColor: 'orange',
-    height: 60,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   gameWinnerTxt: {
     fontSize: 25,
@@ -176,12 +170,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   gameBtn: {
-    margin: 15,
     backgroundColor: 'purple',
-    height: 50,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   gameBtnTxt: {
     fontSize: 20,
